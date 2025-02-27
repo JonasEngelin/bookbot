@@ -1,9 +1,13 @@
+import sys
 from stats import get_num_words
 from stats import sort_by_count
 
 
 def main():
-    file = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    file = sys.argv[1]
     with open(file) as f:
         file_contents = f.read()
 
