@@ -1,3 +1,7 @@
+from stats import get_num_words
+from stats import sort_by_count
+
+
 def main():
     file = "books/frankenstein.txt"
     with open(file) as f:
@@ -6,23 +10,13 @@ def main():
     words = file_contents.split()
 
     print(f"--- Begin report of {file} ---")
-    print(f"{len(words)} words found")
-    dict = characters(file_contents)
-    for char, times in dict.items():
-        print(f"The '{char}' character was found {times} times")
+    print("---------- Word Count ----------")
+    print(f"Found {len(words)} total words")
+    print("-------- Character Count --------")
+    dict = get_num_words(file_contents)
+    sorted_dict = sort_by_count(dict)
+    for item in sorted_dict:
+        print(f"{item['char']}: {item['count']}")
 
-
-def characters(string):
-    chars = {}
-    # Create a list of characters a-z
-    # a in ascii decimal code = 97. z = 122
-    for i in range(97, 123):
-        chars.update({chr(i): 0})
-
-    for char in list(string.lower()):
-        if char in chars.keys():
-            chars[char] += 1
-
-    return chars
 
 main()
